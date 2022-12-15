@@ -1,0 +1,58 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/haddocking/powerfit:
+      branch: master
+      repo: https://github.com/haddocking/powerfit
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/haddocking/powerfit git:
+        commands:
+        - /usr/bin/env sh .sqa/script.messy-plum-bonobo.sh
+        container: qc.acc_homely-aquamarine-dingo
+  QC.Doc:
+    repos:
+      github.com/haddocking/powerfit find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.foggy-saffron-wolverine.sh
+        container: qc.doc_flabby-flax-ferret
+      github.com/haddocking/powerfit git:
+        commands:
+        - /usr/bin/env sh .sqa/script.smelly-green-bullfrog.sh
+        container: qc.doc_thirsty-chocolate-insect
+      github.com/haddocking/powerfit markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.crabby-burgundy-dollar.sh
+        container: qc.doc_seedy-flax-nightingale
+  QC.Lic:
+    repos:
+      github.com/haddocking/powerfit licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.gimpy-cinnabar-flounder.sh
+        container: qc.lic_snazzy-indigo-goat
+  QC.Sec:
+    repos:
+      github.com/haddocking/powerfit bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.gummy-tomato-dolphin.sh
+        container: qc.sec_grumpy-celadon-iguana
+  QC.Sty:
+    repos:
+      github.com/haddocking/powerfit flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.breezy-plum-angora.sh
+        container: qc.sty_smelly-smalt-argentino
+  QC.Ver:
+    repos:
+      github.com/haddocking/powerfit get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.blurry-firebrick-tang.sh
+        container: qc.ver_shabby-zucchini-akita
+timeout: 5400
